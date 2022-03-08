@@ -29,6 +29,14 @@ public class RegexTest {
 	}
 	
 	@Test
+	public void matchExactlyTest() {
+		Regex matchInMiddle = new Regex("hello");
+		assertTrue(matchInMiddle.doesMatchExactly("hello"));
+		assertFalse(matchInMiddle.doesMatchExactly("hello abcde"));
+		assertFalse(matchInMiddle.doesMatchExactly("abcde hello"));
+	}
+	
+	@Test
 	public void matchAOrBTest() {
 		Regex matchAOrB = new Regex("a|b");
 
@@ -43,6 +51,7 @@ public class RegexTest {
 		FSA matchBasicConcat = new Concatenation(List.of(new Literal("a"), new Literal("b"))).compile();
 		
 		assertTrue(matchBasicConcat.doesMatch("ab"));
+		assertFalse(matchBasicConcat.doesMatch("a"));
 		assertFalse(matchBasicConcat.doesMatch("ba"));
 	}
 	

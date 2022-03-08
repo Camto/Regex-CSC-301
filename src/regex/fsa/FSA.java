@@ -42,4 +42,18 @@ public class FSA {
 		}
 		return false;
 	}
+	
+	public boolean doesMatchExactly(String str) {
+		return doesMatchExactly(str, start);
+	}
+	
+	public boolean doesMatchExactly(String str, State state) {
+		for(Transition transition : state.transitions) {
+			int res = transition.apply(str);
+			if(res == -1) continue;
+			if(transition.next == end && str.length() == res) return true;
+			if(doesMatch(str.substring(res), transition.next)) return true;
+		}
+		return false;
+	}
 }

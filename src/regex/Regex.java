@@ -38,4 +38,8 @@ public class Regex {
 	public boolean doesMatch(String str) {
 		return fsa.doesMatch(str);
 	}
+	
+	public boolean doesMatchExactly(String str) {
+		return fsa.doesMatchExactly(str);
+	}
 }
