@@ -58,4 +58,19 @@ public class RegexTest {
 		
 		assertFalse(matchConcatWithAltern.doesMatch("ca"));
 	}
+	
+	@Test
+	public void matchManyATest() {
+		FSA matchManyA = new Concatenation(List.of(
+			new Literal("y"),
+			new KleeneStar(new Literal("a")),
+			new Literal("z")
+		)).getCompiled();
+
+		assertTrue(matchManyA.doesMatch("yaaaz"));
+		assertTrue(matchManyA.doesMatch("yz"));
+
+		assertFalse(matchManyA.doesMatch("y"));
+		assertFalse(matchManyA.doesMatch("yaaaaa"));
+	}
 }

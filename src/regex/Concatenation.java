@@ -5,9 +5,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Concatenation implements AST {
-	private FSA compiled;
-	
+public class Concatenation extends BaseAST {
 	public Concatenation(Collection<AST> nodes) {
 		List<FSA> compiledNodes = nodes
 			.stream()
@@ -22,9 +20,5 @@ public class Concatenation implements AST {
 			compiledNodes.get(i).end.transitions
 				.add(new Transition(compiledNodes.get(i + 1).start))
 		);
-	}
-	
-	public FSA getCompiled() {
-		return compiled;
 	}
 }

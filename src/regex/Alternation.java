@@ -3,9 +3,7 @@ package regex;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class Alternation implements AST {
-	private FSA compiled;
-	
+public class Alternation extends BaseAST {
 	public Alternation(Collection<AST> alternatives) {
 		Collection<FSA> compiledAlternatives = alternatives
 			.stream()
@@ -22,9 +20,5 @@ public class Alternation implements AST {
 		compiledAlternatives.forEach(comp ->
 			comp.end.transitions.add(new Transition(compiled.end))
 		);
-	}
-	
-	public FSA getCompiled() {
-		return compiled;
 	}
 }
