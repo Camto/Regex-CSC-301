@@ -1,13 +1,13 @@
 package regex;
 
 public class Literal implements AST {
-	private String lit;
+	private FSA compiled;
 	
 	public Literal(String lit) {
-		this.lit = lit;
+		compiled = new FSA(str -> str.startsWith(lit) ? lit.length() : -1);
 	}
 	
-	public FSA compile() {
-		return new FSA(str -> str.startsWith(lit) ? lit.length() : -1);
+	public FSA getCompiled() {
+		return compiled;
 	}
 }

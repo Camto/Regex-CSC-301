@@ -18,6 +18,11 @@ public class FSA {
 		start = new State(new ArrayList<>(List.of(new Transition(transition, end))));
 	}
 	
+	public FSA(Transition transition) {
+		end = new State();
+		start = new State(new ArrayList<>(List.of(transition)));
+	}
+	
 	public boolean doesMatch(String str) {
 		for(int i = 0; i < str.length(); i++) {
 			if(doesMatch(str.substring(i), start))

@@ -1,5 +1,5 @@
 package regex;
 
-interface AST {
-	public FSA compile();
+public interface AST {
+	public FSA getCompiled();
 }

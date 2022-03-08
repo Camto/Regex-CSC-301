@@ -1,5 +1,7 @@
 package regex;
 
+import java.util.List;
+
 public class Regex {
 	private FSA fsa;
 	
@@ -15,7 +17,7 @@ public class Regex {
 	
 	public Regex(String expr) {
 		AST ast = parse(expr).ast;
-		fsa = ast.compile();
+		fsa = ast.getCompiled();
 	}
 	
 	private static ASTAndRest parse(String expr) {
@@ -23,10 +25,10 @@ public class Regex {
 			return new ASTAndRest(new Literal(expr), "");
 		else {
 			String[] alts = expr.split("\\|");
-			return new ASTAndRest(new Alternation(
+			return new ASTAndRest(new Alternation(List.of(
 				new Literal(alts[0]),
 				new Literal(alts[1])
-			), "");
+			)), "");
 		}
 	}
 	

@@ -1,29 +1,30 @@
 package regex;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class Alternation implements AST {
-	private AST left;
-	private AST right;
+	private FSA compiled;
 	
-	public Alternation(AST left, AST right) {
-		this.left = left;
-		this.right = right;
+	public Alternation(Collection<AST> alternatives) {
+		Collection<FSA> compiledAlternatives = alternatives
+			.stream()
+			.map(alt -> alt.getCompiled())
+			.collect(Collectors.toList());
+		
+		compiled = new FSA();
+		compiled.start.transitions.addAll(compiledAlternatives
+			.stream()
+			.map(comp -> new Transition(comp.start))
+			.collect(Collectors.toList())
+		);
+		
+		compiledAlternatives.forEach(comp ->
+			comp.end.transitions.add(new Transition(compiled.end))
+		);
 	}
 	
-	public FSA compile() {
-		FSA leftCompiled = left.compile();
-		FSA rightCompiled = right.compile();
-		
-		FSA fsa = new FSA();
-		fsa.start.transitions.addAll(List.of(
-			new Transition(leftCompiled.start),
-			new Transition(rightCompiled.start)
-		));
-
-		leftCompiled.end.transitions.add(new Transition(fsa.end));
-		rightCompiled.end.transitions.add(new Transition(fsa.end));
-		
-		return fsa;
+	public FSA getCompiled() {
+		return compiled;
 	}
 }
