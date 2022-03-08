@@ -7,7 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import regex.Regex;
+import java.util.List;
+
+import regex.*;
 
 public class RegexTest {
 	@Test
@@ -32,5 +34,28 @@ public class RegexTest {
 		assertTrue(matchAOrB.doesMatch("b"));
 		assertFalse(matchAOrB.doesMatch("c"));
 		assertFalse(matchAOrB.doesMatch("d"));
+	}
+	
+	@Test
+	public void matchBasicConcatTest() {
+		FSA matchBasicConcat = new Concatenation(List.of(new Literal("a"), new Literal("b"))).getCompiled();
+		
+		assertTrue(matchBasicConcat.doesMatch("ab"));
+		assertFalse(matchBasicConcat.doesMatch("ba"));
+	}
+	
+	@Test
+	public void matchConcatWithAlternTest() {
+		FSA matchConcatWithAltern = new Concatenation(List.of(
+			new Alternation(List.of(new Literal("a"), new Literal("b"))),
+			new Alternation(List.of(new Literal("c"), new Literal("d")))
+		)).getCompiled();
+
+		assertTrue(matchConcatWithAltern.doesMatch("ac"));
+		assertTrue(matchConcatWithAltern.doesMatch("ad"));
+		assertTrue(matchConcatWithAltern.doesMatch("bc"));
+		assertTrue(matchConcatWithAltern.doesMatch("bd"));
+		
+		assertFalse(matchConcatWithAltern.doesMatch("ca"));
 	}
 }

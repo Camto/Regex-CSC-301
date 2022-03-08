@@ -13,14 +13,14 @@ public class FSA {
 		end = new State();
 	}
 	
+	public FSA(Transition transition) {
+		start = new State(new ArrayList<>(List.of(transition)));
+		end = new State();
+	}
+	
 	public FSA(Function<String, Integer> transition) {
 		end = new State();
 		start = new State(new ArrayList<>(List.of(new Transition(transition, end))));
-	}
-	
-	public FSA(Transition transition) {
-		end = new State();
-		start = new State(new ArrayList<>(List.of(transition)));
 	}
 	
 	public boolean doesMatch(String str) {
@@ -33,6 +33,8 @@ public class FSA {
 	
 	public boolean doesMatch(String str, State state) {
 		for(Transition transition : state.transitions) {
+			// System.out.println(str);
+			// System.out.println(transition);
 			int res = transition.apply(str);
 			if(res == -1) continue;
 			if(transition.next == end) return true;
