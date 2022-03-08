@@ -1,4 +1,4 @@
-package regex;
+package regex.fsa;
 
 import java.util.ArrayList;
 

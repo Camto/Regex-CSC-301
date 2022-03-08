@@ -1,9 +1,12 @@
-package regex;
+package regex.ast;
 
 import java.util.List;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import regex.fsa.FSA;
+import regex.fsa.Transition;
 
 public class Concatenation extends BaseAST {
 	public Concatenation(Collection<AST> nodes) {

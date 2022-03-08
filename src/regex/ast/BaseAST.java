@@ -1,4 +1,6 @@
-package regex;
+package regex.ast;
+
+import regex.fsa.FSA;
 
 public class BaseAST implements AST {
 	protected FSA compiled;

@@ -1,4 +1,7 @@
-package regex;
+package regex.ast;
+
+import regex.fsa.FSA;
+import regex.fsa.Transition;
 
 public class KleeneStar extends BaseAST {
 	public KleeneStar(AST node) {

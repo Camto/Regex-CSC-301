@@ -9,7 +9,9 @@ import org.junit.Test;
 
 import java.util.List;
 
-import regex.*;
+import regex.Regex;
+import regex.ast.*;
+import regex.fsa.FSA;
 
 public class RegexTest {
 	@Test

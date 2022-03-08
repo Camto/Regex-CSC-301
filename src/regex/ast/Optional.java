@@ -1,4 +1,6 @@
-package regex;
+package regex.ast;
+
+import regex.fsa.Transition;
 
 public class Optional extends BaseAST {
 	public Optional(AST node) {

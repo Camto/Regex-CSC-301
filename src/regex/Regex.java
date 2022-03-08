@@ -2,6 +2,9 @@ package regex;
 
 import java.util.List;
 
+import regex.ast.*;
+import regex.fsa.FSA;
+
 public class Regex {
 	private FSA fsa;
 	

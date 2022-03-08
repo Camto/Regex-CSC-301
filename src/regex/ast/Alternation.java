@@ -1,7 +1,10 @@
-package regex;
+package regex.ast;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import regex.fsa.FSA;
+import regex.fsa.Transition;
 
 public class Alternation extends BaseAST {
 	public Alternation(Collection<AST> alternatives) {
