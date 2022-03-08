@@ -1,14 +1,21 @@
 package regex;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.function.Function;
 
 public class FSA {
-	private State start;
-	private State end;
+	public State start;
+	public State end;
+	
+	public FSA() {
+		start = new State();
+		end = new State();
+	}
 	
 	public FSA(Function<String, Integer> transition) {
-		end = new State(new Transition[] {});
-		start = new State(new Transition[] {new Transition(transition, end)});
+		end = new State();
+		start = new State(new ArrayList<>(List.of(new Transition(transition, end))));
 	}
 	
 	public boolean doesMatch(String str) {
@@ -21,8 +28,10 @@ public class FSA {
 	
 	public boolean doesMatch(String str, State state) {
 		for(Transition transition : state.transitions) {
-			if(transition.apply(str) != -1 && transition.next == end)
-				return true;
+			int res = transition.apply(str);
+			if(res == -1) continue;
+			if(transition.next == end) return true;
+			if(doesMatch(str.substring(res), transition.next)) return true;
 		}
 		return false;
 	}

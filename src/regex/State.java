@@ -1,11 +1,15 @@
 package regex;
 
-import java.util.function.Function;
+import java.util.ArrayList;
 
 public class State {
-	public Transition[] transitions;
+	public ArrayList<Transition> transitions;
 	
-	public State(Transition[] transitions) {
+	public State() {
+		transitions = new ArrayList<>();
+	}
+	
+	public State(ArrayList<Transition> transitions) {
 		this.transitions = transitions;
 	}
 }
