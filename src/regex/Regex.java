@@ -20,7 +20,7 @@ public class Regex {
 	
 	public Regex(String expr) {
 		AST ast = parse(expr).ast;
-		fsa = ast.getCompiled();
+		fsa = ast.compile();
 	}
 	
 	private static ASTAndRest parse(String expr) {

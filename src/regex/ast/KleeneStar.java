@@ -1,14 +1,21 @@
 package regex.ast;
 
-import regex.fsa.FSA;
-import regex.fsa.Transition;
+import regex.fsa.*;
 
-public class KleeneStar extends BaseAST {
+public class KleeneStar implements AST {
+	public AST node;
+	
 	public KleeneStar(AST node) {
-		FSA compiledNode = node.getCompiled();
+		this.node = node;
+	}
+	
+	public FSA compile() {
+		FSA compiledNode = node.compile();
 		compiledNode.end.transitions.add(new Transition(compiledNode.start));
 		
-		compiled = new FSA(new Transition(compiledNode.start));
+		FSA compiled = new FSA(new Transition(compiledNode.start));
 		compiledNode.start.transitions.add(new Transition(compiled.end));
+		
+		return compiled;
 	}
 }

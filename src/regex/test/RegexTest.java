@@ -40,7 +40,7 @@ public class RegexTest {
 	
 	@Test
 	public void matchBasicConcatTest() {
-		FSA matchBasicConcat = new Concatenation(List.of(new Literal("a"), new Literal("b"))).getCompiled();
+		FSA matchBasicConcat = new Concatenation(List.of(new Literal("a"), new Literal("b"))).compile();
 		
 		assertTrue(matchBasicConcat.doesMatch("ab"));
 		assertFalse(matchBasicConcat.doesMatch("ba"));
@@ -51,7 +51,7 @@ public class RegexTest {
 		FSA matchConcatWithAltern = new Concatenation(List.of(
 			new Alternation(List.of(new Literal("a"), new Literal("b"))),
 			new Alternation(List.of(new Literal("c"), new Literal("d")))
-		)).getCompiled();
+		)).compile();
 
 		assertTrue(matchConcatWithAltern.doesMatch("ac"));
 		assertTrue(matchConcatWithAltern.doesMatch("ad"));
@@ -67,7 +67,7 @@ public class RegexTest {
 			new Literal("y"),
 			new KleeneStar(new Literal("a")),
 			new Literal("z")
-		)).getCompiled();
+		)).compile();
 
 		assertTrue(matchManyA.doesMatch("yaaaz"));
 		assertTrue(matchManyA.doesMatch("yz"));
@@ -82,7 +82,7 @@ public class RegexTest {
 			new Literal("y"),
 			new KleenePlus(new Literal("a")),
 			new Literal("z")
-		)).getCompiled();
+		)).compile();
 
 		assertTrue(matchManyA.doesMatch("yaaaz"));
 		
@@ -97,7 +97,7 @@ public class RegexTest {
 			new Literal("y"),
 			new Optional(new Literal("a")),
 			new Literal("z")
-		)).getCompiled();
+		)).compile();
 		
 		assertTrue(matchManyA.doesMatch("yaz"));
 		assertTrue(matchManyA.doesMatch("yz"));

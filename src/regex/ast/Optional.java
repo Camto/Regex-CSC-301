@@ -1,10 +1,17 @@
 package regex.ast;
 
-import regex.fsa.Transition;
+import regex.fsa.*;
 
-public class Optional extends BaseAST {
+public class Optional implements AST {
+	public AST node;
+	
 	public Optional(AST node) {
-		compiled = node.getCompiled();
+		this.node = node;
+	}
+	
+	public FSA compile() {
+		FSA compiled = node.compile();
 		compiled.start.transitions.add(new Transition(compiled.end));
+		return compiled;
 	}
 }
