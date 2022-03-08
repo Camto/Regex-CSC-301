@@ -73,4 +73,19 @@ public class RegexTest {
 		assertFalse(matchManyA.doesMatch("y"));
 		assertFalse(matchManyA.doesMatch("yaaaaa"));
 	}
+	
+	@Test
+	public void matchOneOrMoreATest() {
+		FSA matchManyA = new Concatenation(List.of(
+			new Literal("y"),
+			new KleenePlus(new Literal("a")),
+			new Literal("z")
+		)).getCompiled();
+
+		assertTrue(matchManyA.doesMatch("yaaaz"));
+		
+		assertFalse(matchManyA.doesMatch("yz"));
+		assertFalse(matchManyA.doesMatch("y"));
+		assertFalse(matchManyA.doesMatch("yaaaaa"));
+	}
 }
