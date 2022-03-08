@@ -88,4 +88,20 @@ public class RegexTest {
 		assertFalse(matchManyA.doesMatch("y"));
 		assertFalse(matchManyA.doesMatch("yaaaaa"));
 	}
+	
+	@Test
+	public void optionalATest() {
+		FSA matchManyA = new Concatenation(List.of(
+			new Literal("y"),
+			new Optional(new Literal("a")),
+			new Literal("z")
+		)).getCompiled();
+		
+		assertTrue(matchManyA.doesMatch("yaz"));
+		assertTrue(matchManyA.doesMatch("yz"));
+
+		assertFalse(matchManyA.doesMatch("yaaaz"));
+		assertFalse(matchManyA.doesMatch("y"));
+		assertFalse(matchManyA.doesMatch("yaaaaa"));
+	}
 }
