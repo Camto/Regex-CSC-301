@@ -16,4 +16,11 @@ public class RegexTest {
 		assertTrue(matchSingleA.doesMatch("a"));
 		assertFalse(matchSingleA.doesMatch("b"));
 	}
+	
+	@Test
+	public void matchInMiddleTest() {
+		Regex matchInMiddle = new Regex("hello");
+		assertTrue(matchInMiddle.doesMatch("abcde hello abcde"));
+		assertFalse(matchInMiddle.doesMatch("abcde abcde"));
+	}
 }

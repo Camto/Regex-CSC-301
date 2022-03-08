@@ -19,7 +19,7 @@ public class Regex {
 	}
 	
 	private static ASTAndRest parse(String expr) {
-		return new ASTAndRest(new Literal("a"), "");
+		return new ASTAndRest(new Literal(expr), "");
 	}
 	
 	public boolean doesMatch(String str) {
