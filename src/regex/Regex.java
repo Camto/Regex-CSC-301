@@ -1,7 +1,28 @@
 package regex;
 
 public class Regex {
-	public static String maaatch() {
-		return "hello";
+	private FSA fsa;
+	
+	private static class ASTAndRest {
+		public AST ast;
+		public String rest;
+		
+		public ASTAndRest(AST ast, String rest) {
+			this.ast = ast;
+			this.rest = rest;
+		}
+	}
+	
+	public Regex(String expr) {
+		AST ast = parse(expr).ast;
+		fsa = ast.compile();
+	}
+	
+	private static ASTAndRest parse(String expr) {
+		return new ASTAndRest(new Literal("a"), "");
+	}
+	
+	public boolean doesMatch(String str) {
+		return fsa.doesMatch(str);
 	}
 }
