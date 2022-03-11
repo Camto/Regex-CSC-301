@@ -14,4 +14,9 @@ public class KleenePlus implements AST {
 		compiled.end.transitions.add(new Transition(compiled.start));
 		return compiled;
 	}
+	
+	public void print(String indent) {
+		System.out.println(indent + "Plus");
+		node.print(indent + "  ");
+	}
 }

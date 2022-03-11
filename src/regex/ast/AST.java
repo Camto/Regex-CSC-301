@@ -4,4 +4,5 @@ import regex.fsa.FSA;
 
 public interface AST {
 	public FSA compile();
+	public void print(String indent);
 }

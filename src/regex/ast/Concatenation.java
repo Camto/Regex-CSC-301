@@ -33,4 +33,10 @@ public class Concatenation implements AST {
 		
 		return compiled;
 	}
+	
+	public void print(String indent) {
+		System.out.println(indent + "Concat");
+		for(AST node : nodes)
+			node.print(indent + "  ");
+	}
 }

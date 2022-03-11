@@ -18,4 +18,9 @@ public class KleeneStar implements AST {
 		
 		return compiled;
 	}
+	
+	public void print(String indent) {
+		System.out.println(indent + "Star");
+		node.print(indent + "  ");
+	}
 }

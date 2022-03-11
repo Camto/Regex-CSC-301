@@ -72,4 +72,8 @@ public class Regex {
 	public boolean doesMatchExactly(String str) {
 		return fsa.doesMatchExactly(str);
 	}
+	
+	public void print() {
+		ast.print("");
+	}
 }

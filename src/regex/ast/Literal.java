@@ -12,4 +12,8 @@ public class Literal implements AST {
 	public FSA compile() {
 		return new FSA(str -> str.startsWith(lit) ? lit.length() : -1);
 	}
+	
+	public void print(String indent) {
+		System.out.println(indent + '"' + lit + '"');
+	}
 }

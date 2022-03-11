@@ -14,4 +14,9 @@ public class Optional implements AST {
 		compiled.start.transitions.add(new Transition(compiled.end));
 		return compiled;
 	}
+	
+	public void print(String indent) {
+		System.out.println(indent + "Opt");
+		node.print(indent + "  ");
+	}
 }

@@ -34,4 +34,10 @@ public class Alternation implements AST {
 		
 		return compiled;
 	}
+	
+	public void print(String indent) {
+		System.out.println(indent + "Alt");
+		for(AST alternative : alternatives)
+			alternative.print(indent + "  ");
+	}
 }
