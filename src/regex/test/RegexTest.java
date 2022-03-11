@@ -17,6 +17,7 @@ public class RegexTest {
 	@Test
 	public void matchSingleATest() {
 		Regex matchSingleA = new Regex("a");
+		
 		assertTrue(matchSingleA.doesMatch("a"));
 		assertFalse(matchSingleA.doesMatch("b"));
 	}
@@ -24,6 +25,7 @@ public class RegexTest {
 	@Test
 	public void matchInMiddleTest() {
 		Regex matchInMiddle = new Regex("hello");
+		
 		assertTrue(matchInMiddle.doesMatch("abcde hello abcde"));
 		assertFalse(matchInMiddle.doesMatch("abcde abcde"));
 	}
@@ -31,6 +33,7 @@ public class RegexTest {
 	@Test
 	public void matchExactlyTest() {
 		Regex matchInMiddle = new Regex("hello");
+		
 		assertTrue(matchInMiddle.doesMatchExactly("hello"));
 		assertFalse(matchInMiddle.doesMatchExactly("hello abcde"));
 		assertFalse(matchInMiddle.doesMatchExactly("abcde hello"));
@@ -47,36 +50,20 @@ public class RegexTest {
 	}
 	
 	@Test
-	public void matchBasicConcatTest() {
-		FSA matchBasicConcat = new Concatenation(List.of(new Literal("a"), new Literal("b"))).compile();
-		
-		assertTrue(matchBasicConcat.doesMatch("ab"));
-		assertFalse(matchBasicConcat.doesMatch("a"));
-		assertFalse(matchBasicConcat.doesMatch("ba"));
-	}
-	
-	@Test
 	public void matchConcatWithAlternTest() {
-		FSA matchConcatWithAltern = new Concatenation(List.of(
-			new Alternation(List.of(new Literal("a"), new Literal("b"))),
-			new Alternation(List.of(new Literal("c"), new Literal("d")))
-		)).compile();
+		Regex matchConcatWithAltern = new Regex("(a|b)(c|d)");
 
-		assertTrue(matchConcatWithAltern.doesMatch("ac"));
-		assertTrue(matchConcatWithAltern.doesMatch("ad"));
-		assertTrue(matchConcatWithAltern.doesMatch("bc"));
-		assertTrue(matchConcatWithAltern.doesMatch("bd"));
+		assertTrue(matchConcatWithAltern.doesMatchExactly("ac"));
+		assertTrue(matchConcatWithAltern.doesMatchExactly("ad"));
+		assertTrue(matchConcatWithAltern.doesMatchExactly("bc"));
+		assertTrue(matchConcatWithAltern.doesMatchExactly("bd"));
 		
 		assertFalse(matchConcatWithAltern.doesMatch("ca"));
 	}
 	
 	@Test
 	public void matchManyATest() {
-		FSA matchManyA = new Concatenation(List.of(
-			new Literal("y"),
-			new KleeneStar(new Literal("a")),
-			new Literal("z")
-		)).compile();
+		Regex matchManyA = new Regex("ya*z");
 
 		assertTrue(matchManyA.doesMatch("yaaaz"));
 		assertTrue(matchManyA.doesMatch("yz"));
@@ -87,11 +74,7 @@ public class RegexTest {
 	
 	@Test
 	public void matchOneOrMoreATest() {
-		FSA matchManyA = new Concatenation(List.of(
-			new Literal("y"),
-			new KleenePlus(new Literal("a")),
-			new Literal("z")
-		)).compile();
+		Regex matchManyA = new Regex("ya+z");
 
 		assertTrue(matchManyA.doesMatch("yaaaz"));
 		
@@ -102,11 +85,7 @@ public class RegexTest {
 	
 	@Test
 	public void optionalATest() {
-		FSA matchManyA = new Concatenation(List.of(
-			new Literal("y"),
-			new Optional(new Literal("a")),
-			new Literal("z")
-		)).compile();
+		Regex matchManyA = new Regex("ya?z");
 		
 		assertTrue(matchManyA.doesMatch("yaz"));
 		assertTrue(matchManyA.doesMatch("yz"));

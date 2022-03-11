@@ -37,7 +37,6 @@ public class Regex {
 				expr = group.rest;
 				currentAlt.add(group.ast);
 			} else if(first_char == ')') {
-				expr = expr.substring(1);
 				break;
 			} else if(first_char == '|') {
 				fullExpr.add(currentAlt);
@@ -46,7 +45,7 @@ public class Regex {
 				currentAlt.add(new KleeneStar(currentAlt.remove(currentAlt.size() - 1)));
 			} else if(first_char == '+') {
 				currentAlt.add(new KleenePlus(currentAlt.remove(currentAlt.size() - 1)));
-			} else if(first_char == '*') {
+			} else if(first_char == '?') {
 				currentAlt.add(new Optional(currentAlt.remove(currentAlt.size() - 1)));
 			} else {
 				currentAlt.add(new Literal(expr.substring(0, 1)));
