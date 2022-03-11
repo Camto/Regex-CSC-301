@@ -94,4 +94,12 @@ public class RegexTest {
 		assertFalse(matchManyA.doesMatch("y"));
 		assertFalse(matchManyA.doesMatch("yaaaaa"));
 	}
+	
+	@Test
+	public void greedTest() {
+		Regex matchManyA = new Regex("a*");
+		
+		assertTrue(matchManyA.doesMatchExactly("aaaaaa"));
+		assertFalse(matchManyA.doesMatchExactly("bbbbbb"));
+	}
 }
