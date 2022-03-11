@@ -52,7 +52,7 @@ public class FSA {
 			int res = transition.apply(str);
 			if(res == -1) continue;
 			if(transition.next == end && str.length() == res) return true;
-			if(doesMatch(str.substring(res), transition.next)) return true;
+			if(doesMatchExactly(str.substring(res), transition.next)) return true;
 		}
 		return false;
 	}

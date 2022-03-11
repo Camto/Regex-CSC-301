@@ -1,20 +1,22 @@
 package regex.ast;
 
 import java.util.List;
-import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import regex.fsa.*;
 
 public class Concatenation implements AST {
-	public Collection<AST> nodes;
+	public List<AST> nodes;
 	
-	public Concatenation(Collection<AST> nodes) {
+	public Concatenation(List<AST> nodes) {
 		this.nodes = nodes;
 	}
 	
 	public FSA compile() {
+		if(nodes.size() == 0) return new FSA(str -> 0);
+		if(nodes.size() == 1) return nodes.get(0).compile();
+		
 		List<FSA> compiledNodes = nodes
 			.stream()
 			.map(alt -> alt.compile())

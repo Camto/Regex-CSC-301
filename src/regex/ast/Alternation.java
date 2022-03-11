@@ -1,19 +1,22 @@
 package regex.ast;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import regex.fsa.*;
 
 public class Alternation implements AST {
-	public Collection<AST> alternatives;
+	public List<AST> alternatives;
 	
-	public Alternation(Collection<AST> alternatives) {
+	public Alternation(List<AST> alternatives) {
 		this.alternatives = alternatives;
 	}
 	
 	public FSA compile() {
-		Collection<FSA> compiledAlternatives = alternatives
+		if(alternatives.size() == 0) return new FSA(str -> 0);
+		if(alternatives.size() == 1) return alternatives.get(0).compile();
+		
+		List<FSA> compiledAlternatives = alternatives
 			.stream()
 			.map(alt -> alt.compile())
 			.collect(Collectors.toList());
